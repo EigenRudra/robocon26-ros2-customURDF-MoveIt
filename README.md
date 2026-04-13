@@ -1,4 +1,4 @@
-# Robocon 2026: Round 1 Submission
+# Robocon 2026: Round 1 Ideation
 
 **Author:** Rudraneel Shee
 
@@ -7,7 +7,7 @@
 **NOTE: This is not the final repo. Will update soon.**
 
 ## Features
-* **Robot Description:** Custom URDF/Xacro integrating a 6-DOF AR4 arm onto a custom tracked wheel drive chassis.
+* **Robot Description:** Custom URDF (Xacro) integrating a 6-DOF AR4 arm onto a custom tracked wheel drive chassis.
 * **Physics Simulation:** Gazebo (Harmonic) integration with `gz_ros2_control` and accurate joint dynamics.
 * **Motion Planning:** MoveIt 2 configuration with collision-aware inverse kinematics (OMPL) and time-optimal trajectory generation.
 * **World:** Custom Robocon arena loaded via SDF.
@@ -43,8 +43,10 @@ Use the interactive marker in RViz to set a goal pose for the arm, click Plan, a
 ## Acknowledgments & Credits
 
 * **Robotic Arm:** The arm models, URDF macros, and base configurations used in this project are sourced from the excellent [ar4_ros_driver](https://github.com/ycheng517/ar4_ros_driver/) repository by [ycheng517](https://github.com/ycheng517). Huge thanks for providing the open-source ROS 2 driver and description packages for the Annin AR4 robot arm!
+______
 
 
 ##Visuals
 
 Click to watch the video
+
