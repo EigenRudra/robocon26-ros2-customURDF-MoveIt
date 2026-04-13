@@ -1,0 +1,730 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<robot name="my_bot_updated" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:arg name="ar_model" default="mk3"/> 
+
+  <xacro:include filename="$(find annin_ar4_description)/urdf/ar_macro.xacro" />
+
+  <link name="arm_mount_link">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.5"/> 
+      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
+    </inertial>
+    <visual>
+      <geometry><box size="0.1 0.1 0.02"/></geometry>
+      <material name="Black"><color rgba="0 0 0 1"/></material>
+    </visual>
+    <collision>
+      <geometry><box size="0.1 0.1 0.02"/></geometry>
+    </collision>
+  </link>
+
+  <joint name="arm_mount_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="arm_mount_link"/>
+    <origin xyz="0.1 0 0.01" rpy="0 0 1.5708"/> 
+  </joint>
+  
+  <xacro:ar_robot 
+    tf_prefix="arm_" 
+    parent="arm_mount_link"          
+    robot_parameters_file="$(find annin_ar4_description)/config/$(arg ar_model).yaml" scale="0.7 0.7 0.7">
+    
+    <origin xyz="0 0 0" rpy="0 0 0" />
+  </xacro:ar_robot>
+  
+  <link name="base_footprint"/>
+
+  <joint name="base_joint" type="fixed">
+    <parent link="base_footprint"/>
+    <child link="base_link"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="-0.1046 -0.0031849 -0.002325"
+        rpy="0 0 0" />
+      <mass
+        value="4.0157" />
+      <inertia
+        ixx="0.02583"
+        ixy="-0.00013505"
+        ixz="0.0015874"
+        iyy="0.03584"
+        iyz="-5.474E-05"
+        izz="0.054982" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://my_bot_updated/meshes/base_link.STL"/>
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.2 0.4 0.69804 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://my_bot_updated/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="left_front_wheel">
+    <inertial>
+      <origin
+        xyz="5.8193E-12 -3.5453E-12 -0.0018907"
+        rpy="0 0 0" />
+      <mass
+        value="0.37987" />
+      <inertia
+        ixx="0.00047514"
+        ixy="-1.892E-19"
+        ixz="-6.6875E-19"
+        iyy="0.00047514"
+        iyz="1.7746E-17"
+        izz="0.00090946" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://my_bot_updated/meshes/left_front_wheel.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://my_bot_updated/meshes/left_front_wheel.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="left_front_joint"
+    type="continuous">
+    <origin
+      xyz="0.13046 0.18458 -0.051237"
+      rpy="-1.5708 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="left_front_wheel" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      effort="500"
+      velocity="100" />
+    <dynamics
+      damping="0.001"
+      friction="0" />
+  </joint>
+  <link
+    name="left_mid_wheel">
+    <inertial>
+      <origin
+        xyz="7.5762E-13 -5.1648E-13 -0.0030342"
+        rpy="0 0 0" />
+      <mass
+        value="0.37987" />
+      <inertia
+        ixx="0.00047514"
+        ixy="3.095E-19"
+        ixz="4.1648E-18"
+        iyy="0.00047514"
+        iyz="1.7567E-17"
+        izz="0.00090946" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://my_bot_updated/meshes/left_mid_wheel.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://my_bot_updated/meshes/left_mid_wheel.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="left_mid_joint"
+    type="continuous">
+    <origin
+      xyz="-0.17401 0.18458 -0.049502"
+      rpy="-1.5708 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="left_mid_wheel" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      effort="500"
+      velocity="50" />
+    <dynamics
+      damping="0.1"
+      friction="0" />
+  </joint>
+  <link
+    name="left_rear_wheel">
+    <inertial>
+      <origin
+        xyz="1.4906E-12 6.7601E-13 -0.0082236"
+        rpy="0 0 0" />
+      <mass
+        value="0.37987" />
+      <inertia
+        ixx="0.00047514"
+        ixy="1.425E-19"
+        ixz="1.4928E-18"
+        iyy="0.00047514"
+        iyz="-7.2713E-18"
+        izz="0.00090946" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://my_bot_updated/meshes/left_rear_wheel.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://my_bot_updated/meshes/left_rear_wheel.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="left_rear_joint"
+    type="continuous">
+    <origin
+      xyz="-0.37763 0.18458 -0.032903"
+      rpy="-1.5708 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="left_rear_wheel" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      effort="500"
+      velocity="100" />
+    <dynamics
+      damping="0.001"
+      friction="0" />
+  </joint>
+  <link
+    name="right_front_wheel">
+    <inertial>
+      <origin
+        xyz="3.9191E-14 1.9784E-13 0.003917"
+        rpy="0 0 0" />
+      <mass
+        value="0.37987" />
+      <inertia
+        ixx="0.00047514"
+        ixy="2.5146E-19"
+        ixz="1.591E-18"
+        iyy="0.00047514"
+        iyz="-7.3322E-18"
+        izz="0.00090946" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://my_bot_updated/meshes/right_front_wheel.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://my_bot_updated/meshes/right_front_wheel.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="right_front_joint"
+    type="continuous">
+    <origin
+      xyz="0.13261 -0.19327 -0.049691"
+      rpy="-1.5708 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="right_front_wheel" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      effort="500"
+      velocity="100" />
+    <dynamics
+      damping="0.001"
+      friction="0" />
+  </joint>
+  <link
+    name="right_mid_wheel">
+    <inertial>
+      <origin
+        xyz="7.3985E-13 -5.2192E-13 0.0017119"
+        rpy="0 0 0" />
+      <mass
+        value="0.37987" />
+      <inertia
+        ixx="0.00047514"
+        ixy="-9.5539E-20"
+        ixz="1.7894E-18"
+        iyy="0.00047514"
+        iyz="-7.6785E-18"
+        izz="0.00090946" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://my_bot_updated/meshes/right_mid_wheel.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://my_bot_updated/meshes/right_mid_wheel.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="right_mid_joint"
+    type="continuous">
+    <origin
+      xyz="-0.17467 -0.19327 -0.050439"
+      rpy="-1.5708 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="right_mid_wheel" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      effort="500"
+      velocity="50" />
+    <dynamics
+      damping="0.1"
+      friction="0" />
+  </joint>
+  <link
+    name="right_rear_wheel">
+    <inertial>
+      <origin
+        xyz="-8.8036E-12 1.0599E-11 0.0010526"
+        rpy="0 0 0" />
+      <mass
+        value="0.37987" />
+      <inertia
+        ixx="0.00047514"
+        ixy="4.1876E-20"
+        ixz="1.5282E-18"
+        iyy="0.00047514"
+        iyz="-7.4257E-18"
+        izz="0.00090946" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://my_bot_updated/meshes/right_rear_wheel.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://my_bot_updated/meshes/right_rear_wheel.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="right_rear_joint"
+    type="continuous">
+    <origin
+      xyz="-0.37708 -0.19327 -0.03261"
+      rpy="-1.5708 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="right_rear_wheel" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      effort="500"
+      velocity="100" />
+    <dynamics
+      damping="0.001"
+      friction="0" />
+  </joint>
+  <link
+    name="left_track_link">
+    <inertial>
+      <origin
+        xyz="0.0030129 0.0025118 -0.0093182"
+        rpy="0 0 0" />
+      <mass
+        value="0.19806" />
+      <inertia
+        ixx="1.776E-05"
+        ixy="-1.9198E-06"
+        ixz="-7.6806E-21"
+        iyy="3.6634E-05"
+        iyz="1.4031E-19"
+        izz="3.3763E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://my_bot_updated/meshes/left_track_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision name="collision_main_box">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.51 0.025 0.08"/> 
+      </geometry>
+      <surface>
+        <friction>
+          <ode>
+            <mu>0.1</mu> 
+            <mu2>0.1</mu2>
+          </ode>
+        </friction>
+      </surface>
+    </collision>
+
+    <collision name="collision_front">
+      <origin xyz="0.255 0 0" rpy="1.57079 0 0"/> <geometry>
+        <cylinder radius="0.07" length="0.025"/>
+      </geometry>
+      <surface>
+        <friction>
+          <ode>
+            <mu>1.5</mu> 
+            <mu2>1.5</mu2>
+          </ode>
+        </friction>
+      </surface>
+    </collision>
+
+    <collision name="collision_rear">
+      <origin xyz="-0.255 0 0" rpy="1.57079 0 0"/> 
+      <geometry>
+        <cylinder radius="0.07" length="0.025"/>
+      </geometry>
+      <surface>
+        <friction>
+          <ode>
+            <mu>1.5</mu> 
+            <mu2>1.5</mu2>
+          </ode>
+        </friction>
+      </surface>
+    </collision>
+  </link>
+  <joint
+    name="left_track_joint"
+    type="fixed">
+    <origin
+      xyz="-0.12393 0.1939 -0.042511"
+      rpy="-1.5708 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="left_track_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="right_track_link">
+    <inertial>
+      <origin
+        xyz="0.0030129 0.0025118 -0.0093182"
+        rpy="0 0 0" />
+      <mass
+        value="0.19806" />
+      <inertia
+        ixx="1.776E-05"
+        ixy="-1.9198E-06"
+        ixz="-7.6806E-21"
+        iyy="3.6634E-05"
+        iyz="1.4031E-19"
+        izz="3.3763E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://my_bot_updated/meshes/right_track_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision name="collision_main_box">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.51 0.025 0.08"/> 
+      </geometry>
+      <surface>
+        <friction>
+          <ode>
+            <mu>0.1</mu> 
+            <mu2>0.1</mu2>
+          </ode>
+        </friction>
+      </surface>
+    </collision>
+
+    <collision name="collision_front">
+      <origin xyz="0.255 0 0" rpy="1.57079 0 0"/> <geometry>
+        <cylinder radius="0.07" length="0.025"/>
+      </geometry>
+      <surface>
+        <friction>
+          <ode>
+            <mu>1.5</mu> 
+            <mu2>1.5</mu2>
+          </ode>
+        </friction>
+      </surface>
+    </collision>
+
+    <collision name="collision_rear">
+      <origin xyz="-0.255 0 0" rpy="1.57079 0 0"/> 
+      <geometry>
+        <cylinder radius="0.07" length="0.025"/>
+      </geometry>
+      <surface>
+        <friction>
+          <ode>
+            <mu>1.5</mu> 
+            <mu2>1.5</mu2>
+          </ode>
+        </friction>
+      </surface>
+    </collision>
+  </link>
+  <joint
+    name="right_track_joint"
+    type="fixed">
+    <origin
+      xyz="-0.12409 -0.19207 -0.043312"
+      rpy="-1.5708 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="right_track_link" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+  
+  <gazebo reference="left_track_link">
+    <mu1>1.0</mu1>
+    <mu2>1.0</mu2>
+    <kp>1000000.0</kp>
+    <kd>100.0</kd>
+    <minDepth>0.005</minDepth>
+    <material>Gazebo/Black</material>
+  </gazebo>
+
+  <gazebo reference="right_track_link">
+    <mu1>1.0</mu1>
+    <mu2>1.0</mu2>
+    <kp>1000000.0</kp>
+    <kd>100.0</kd>
+    <minDepth>0.005</minDepth>
+    <material>Gazebo/Black</material>
+  </gazebo>
+    
+  <gazebo reference="left_front_wheel">
+    <mu1>1.5</mu1> <mu2>1.5</mu2> <kp>1000000.0</kp> <kd>100.0</kd>
+  </gazebo>
+  <gazebo reference="right_front_wheel">
+    <mu1>1.5</mu1> <mu2>1.5</mu2> <kp>1000000.0</kp> <kd>100.0</kd>
+  </gazebo>
+
+  <gazebo reference="left_rear_wheel">
+    <mu1>1.5</mu1> <mu2>1.5</mu2> <kp>1000000.0</kp> <kd>100.0</kd>
+  </gazebo>
+  <gazebo reference="right_rear_wheel">
+    <mu1>1.5</mu1> <mu2>1.5</mu2> <kp>1000000.0</kp> <kd>100.0</kd>
+  </gazebo>
+  
+  <gazebo>
+    <plugin filename="gz-sim-diff-drive-system" name="gz::sim::systems::DiffDrive">
+        <topic>cmd_vel</topic>
+        <odom_topic>odometry</odom_topic>
+        <tf_topic>tf</tf_topic>
+        <left_joint>left_mid_joint</left_joint>
+        <right_joint>right_mid_joint</right_joint>
+        <wheel_separation>0.445</wheel_separation>
+        <wheel_radius>0.05675</wheel_radius>
+        <max_linear_acceleration>20.0</max_linear_acceleration>
+        <min_linear_acceleration>-20.0</min_linear_acceleration>
+        <frame_id>odom</frame_id>
+        <child_frame_id>base_footprint</child_frame_id>
+    </plugin>
+
+    <plugin filename="gz-sim-diff-drive-system" name="gz::sim::systems::DiffDrive">
+        <topic>cmd_vel</topic>
+        <odom_topic>odometry_front</odom_topic> <tf_topic>tf_front</tf_topic>
+        <left_joint>left_front_joint</left_joint>
+        <right_joint>right_front_joint</right_joint>
+        <wheel_separation>0.445</wheel_separation>
+        <wheel_radius>0.05675</wheel_radius>
+        <max_linear_acceleration>20.0</max_linear_acceleration>
+        <min_linear_acceleration>-20.0</min_linear_acceleration>
+    </plugin>
+
+    <plugin filename="gz-sim-diff-drive-system" name="gz::sim::systems::DiffDrive">
+        <topic>cmd_vel</topic>
+        <odom_topic>odometry_rear</odom_topic>
+        <tf_topic>tf_rear</tf_topic>
+        <left_joint>left_rear_joint</left_joint>
+        <right_joint>right_rear_joint</right_joint>
+        <wheel_separation>0.445</wheel_separation>
+        <wheel_radius>0.05675</wheel_radius>
+        <max_linear_acceleration>20.0</max_linear_acceleration>
+        <min_linear_acceleration>-20.0</min_linear_acceleration>
+    </plugin>
+</gazebo>
+<ros2_control name="GazeboSimSystem" type="system">
+    <hardware>
+      <plugin>gz_ros2_control/GazeboSimSystem</plugin>
+    </hardware>
+    
+    <joint name="arm_joint_1"> <command_interface name="position"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+    
+    <joint name="arm_joint_2">
+      <command_interface name="position"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+    
+    <joint name="arm_joint_3">
+      <command_interface name="position"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+    
+    <joint name="arm_joint_4">
+      <command_interface name="position"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+    
+    <joint name="arm_joint_5">
+      <command_interface name="position"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+    
+    <joint name="arm_joint_6">
+      <command_interface name="position"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+  </ros2_control>
+
+  <gazebo>
+    <plugin filename="gz_ros2_control-system" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
+      <parameters>$(find my_bot_updated)/config/my_controllers.yaml</parameters>
+    </plugin>
+  </gazebo>
+</robot>
